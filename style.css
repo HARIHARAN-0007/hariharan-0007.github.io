@@ -487,3 +487,157 @@ body{
   font-weight: 600;
   color: #1f1f1f;
 }
+/* ============================= */
+/* ✅ Large Laptop (1400px+) */
+/* ============================= */
+@media (min-width: 1400px) {
+  .hero-section {
+    padding: 0px 120px;
+  }
+
+  .main-name {
+    font-size: 80px;
+  }
+
+  .profile-img {
+    height: 600px;
+  }
+}
+
+/* ============================= */
+/* ✅ Laptop (1024px - 1399px) */
+/* ============================= */
+@media (max-width: 1399px) {
+  .hero-section {
+    padding: 0px 60px;
+  }
+
+  .main-name {
+    font-size: 60px;
+  }
+
+  .profile-img {
+    height: 480px;
+  }
+
+  .section {
+    padding: 40px;
+  }
+}
+
+/* ============================= */
+/* ✅ Tablet (768px - 1023px) */
+/* ============================= */
+@media (max-width: 1023px) {
+
+  .navbar {
+    padding: 15px 40px;
+  }
+
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .hero-content {
+    margin-bottom: 40px;
+  }
+
+  .main-name {
+    font-size: 45px;
+  }
+
+  .profile-img {
+    height: 380px;
+  }
+
+  .purple-circle {
+    width: 300px;
+    height: 300px;
+  }
+
+  .section {
+    margin: 30px 20px;
+    padding: 35px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================= */
+/* ✅ Mobile (Below 768px) */
+/* ============================= */
+@media (max-width: 767px) {
+
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .navbar nav a {
+    margin-left: 15px;
+    font-size: 14px;
+  }
+
+  .hero-section {
+    flex-direction: column;
+    padding: 30px 15px;
+    border-radius: 30px;
+  }
+
+  .main-name {
+    font-size: 35px;
+  }
+
+  .intro-text {
+    font-size: 15px;
+  }
+
+  .role-badge {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .profile-img {
+    height: 300px;
+  }
+
+  .purple-circle {
+    width: 230px;
+    height: 230px;
+  }
+
+  .section {
+    margin: 20px 10px;
+    padding: 25px;
+  }
+
+  .projects-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-container {
+    gap: 25px;
+  }
+
+  .contact-card {
+    width: 140px;
+    height: 140px;
+  }
+
+  .contact-card img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .contact-card h3 {
+    font-size: 15px;
+  }
+}
