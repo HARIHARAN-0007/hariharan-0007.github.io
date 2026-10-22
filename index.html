@@ -3657,6 +3657,300 @@ body {
   color: color-mix(in srgb, var(--lc) 55%, #0c1630);
 }
 
+/* ------------------------------------------------------------------
+   About: moving focus board
+------------------------------------------------------------------ */
+.focus {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  margin-top: 22px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.f-tabs {
+  display: grid;
+  align-content: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  gap: 4px;
+  border-right: 1px solid var(--line);
+  background: rgba(6, 10, 22, 0.35);
+}
+
+.f-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  height: 100%;
+  min-height: 52px;
+  padding: 10px 16px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.f-tab b {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.f-tab:hover {
+  color: var(--text);
+  transform: translateX(4px);
+}
+
+.f-tab.is-on {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  transform: translateX(6px);
+}
+
+.f-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--warm), var(--teal));
+}
+
+.f-tab.is-on .f-bar {
+  animation: fbar var(--dur, 5s) linear forwards;
+}
+
+.focus.is-paused .f-tab.is-on .f-bar {
+  animation-play-state: paused;
+}
+
+@keyframes fbar {
+  to { width: 100%; }
+}
+
+.f-view {
+  position: relative;
+  min-width: 0;
+  min-height: 330px;
+}
+
+.f-pane {
+  display: none;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+  padding: 26px 30px;
+}
+
+.f-pane.is-on {
+  display: grid;
+  animation: fpane 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes fpane {
+  from { opacity: 0; transform: translateX(28px); }
+}
+
+.f-vis {
+  border-radius: 14px;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(190, 205, 245, 0.14) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    #070d1c;
+  padding: 10px;
+}
+
+.fv {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.f-copy h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.f-copy p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.f-pane.is-on .f-copy > * {
+  animation: frise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.f-pane.is-on .f-copy > :nth-child(2) { animation-delay: 0.1s; }
+.f-pane.is-on .f-copy > :nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes frise {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+.f-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.f-tags li {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  animation: ftag 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+  animation-delay: calc(0.35s + var(--n, 0) * 0.09s);
+}
+
+@keyframes ftag {
+  from { opacity: 0; transform: scale(0.6); }
+}
+
+/* the small animated pictures */
+.fv text { fill: #c9d6f5; }
+.fv-cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; fill: #8fa0c8 !important; }
+.fv-cap.warn { fill: #ff9a8a !important; }
+.fv-mono { font-family: var(--font-mono); font-size: 13px; }
+.fv-mono.sm { font-size: 12px; font-weight: 700; }
+.fv-frame { fill: rgba(125, 179, 255, 0.07); stroke: #7db3ff; stroke-width: 1.6; }
+
+/* computer vision */
+.fv-scan { fill: #5fe3c9; filter: drop-shadow(0 0 6px #5fe3c9); animation: fvscan 2.6s ease-in-out infinite; }
+@keyframes fvscan { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(127px); } }
+.fv-kp circle { fill: #ffc47a; animation: fvpulse 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.fv-kp.k2 circle { fill: #5fe3c9; }
+.fv-kp circle:nth-child(2) { animation-delay: 0.25s; } .fv-kp circle:nth-child(3) { animation-delay: 0.5s; }
+.fv-kp circle:nth-child(4) { animation-delay: 0.75s; } .fv-kp circle:nth-child(5) { animation-delay: 1s; }
+@keyframes fvpulse { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.7); opacity: 1; } }
+.fv-match line { stroke: #7db3ff; stroke-width: 1.4; stroke-dasharray: 5 5; opacity: 0.8; animation: fvflow 1.2s linear infinite; }
+@keyframes fvflow { to { stroke-dashoffset: -20; } }
+
+/* reinforcement learning */
+.fv-grid rect { fill: rgba(125, 179, 255, 0.05); stroke: #7db3ff; stroke-width: 1.4; }
+.fv-grid path { stroke: rgba(125, 179, 255, 0.35); stroke-width: 1; fill: none; }
+.fv-cliff { fill: rgba(255, 120, 100, 0.25); }
+.fv-flag { fill: none; stroke: #5fe3c9; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.fv-trail { fill: none; stroke: #ffc47a; stroke-width: 2.4; stroke-dasharray: 340; stroke-dashoffset: 340; stroke-linejoin: round; animation: fvtrail 5s ease-in-out infinite; }
+@keyframes fvtrail { 0% { stroke-dashoffset: 340; } 70%, 100% { stroke-dashoffset: 0; } }
+.fv-agent { fill: #7db3ff; stroke: #fff; stroke-width: 2.5; filter: drop-shadow(0 0 8px #7db3ff); animation: fvagent 5s ease-in-out infinite; }
+@keyframes fvagent {
+  0% { transform: translate(0, 0); }
+  14% { transform: translate(80px, 0); }
+  28% { transform: translate(80px, -40px); }
+  56% { transform: translate(200px, -40px); }
+  70%, 100% { transform: translate(240px, -80px); }
+}
+
+/* generative AI */
+.fv-type { animation: fvtype 4s steps(30) infinite; }
+@keyframes fvtype { 0% { width: 0; } 55%, 100% { width: 260px; } }
+.fv-caret { fill: #5fe3c9; animation: fvblink 0.8s steps(2) infinite; }
+@keyframes fvblink { 50% { opacity: 0; } }
+.fv-tiles rect { opacity: 0; animation: fvtile 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.fv-tiles rect:nth-child(1) { animation-delay: 1.2s; } .fv-tiles rect:nth-child(2) { animation-delay: 1.4s; } .fv-tiles rect:nth-child(3) { animation-delay: 1.6s; }
+.fv-tiles rect:nth-child(4) { animation-delay: 1.8s; } .fv-tiles rect:nth-child(5) { animation-delay: 2s; } .fv-tiles rect:nth-child(6) { animation-delay: 2.2s; }
+@keyframes fvtile { 0% { opacity: 0; transform: scale(0.7); } 12%, 70% { opacity: 0.85; transform: scale(1); } 90%, 100% { opacity: 0; transform: scale(1); } }
+.fv-spark { fill: #fff; transform-box: fill-box; transform-origin: center; animation: fvtwinkle 1.6s ease-in-out infinite; filter: drop-shadow(0 0 6px #fff); }
+@keyframes fvtwinkle { 0%, 100% { transform: scale(0.4) rotate(0); opacity: 0.4; } 50% { transform: scale(1.1) rotate(45deg); opacity: 1; } }
+
+/* large language models */
+.fv-tokens rect { fill: rgba(125, 179, 255, 0.12); stroke: #7db3ff; stroke-width: 1.4; opacity: 0; animation: fvtok 5s ease-out infinite; }
+.fv-tokens text { font-family: var(--font-mono); font-size: 12px; opacity: 0; animation: fvtok 5s ease-out infinite; }
+.fv-tokens rect:nth-child(1), .fv-tokens text:nth-of-type(1) { animation-delay: 0s; } .fv-tokens rect:nth-child(2), .fv-tokens text:nth-of-type(2) { animation-delay: 0.25s; }
+.fv-tokens rect:nth-child(3), .fv-tokens text:nth-of-type(3) { animation-delay: 0.5s; } .fv-tokens rect:nth-child(4), .fv-tokens text:nth-of-type(4) { animation-delay: 0.75s; }
+.fv-tokens rect:nth-child(5), .fv-tokens text:nth-of-type(5) { animation-delay: 1s; } .fv-tokens rect:nth-child(6), .fv-tokens text:nth-of-type(6) { animation-delay: 1.25s; }
+@keyframes fvtok { 0% { opacity: 0; transform: translateY(8px); } 8%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.fv-arcs path { fill: none; stroke: #ffc47a; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: 0.85; animation: fvflow 1.1s linear infinite; }
+.fv-barbg { fill: rgba(255, 255, 255, 0.1); }
+.fv-bar { fill: #5fe3c9; transform-box: fill-box; transform-origin: left center; }
+.fv-bar.b1 { animation: fvgrow 4s ease-in-out infinite; --to: 0.92; }
+.fv-bar.b2 { fill: #7db3ff; animation: fvgrow 4s ease-in-out infinite 0.4s; --to: 0.78; }
+@keyframes fvgrow { 0% { transform: scaleX(0.05); } 55%, 100% { transform: scaleX(var(--to, 0.8)); } }
+
+/* NLP */
+.fv-doc path { stroke: #8fa0c8; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 70; animation: fvdoc 3s ease-in-out infinite; }
+@keyframes fvdoc { 0% { stroke-dashoffset: 70; } 40%, 100% { stroke-dashoffset: 0; } }
+.fv-flow { fill: none; stroke: #ffc47a; stroke-width: 2; stroke-dasharray: 5 5; animation: fvflow 0.9s linear infinite; }
+.fv-node { fill: rgba(181, 140, 255, 0.2); stroke: #b58cff; stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: fvpulse 2s ease-in-out infinite; }
+.fv-labels text { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+.fv-bar.l1 { fill: #5fe3c9; animation: fvgrow 3s ease-in-out infinite; --to: 0.88; }
+.fv-bar.l2 { fill: #ffc47a; animation: fvgrow 3s ease-in-out infinite 0.2s; --to: 0.4; }
+.fv-bar.l3 { fill: #ff8fb1; animation: fvgrow 3s ease-in-out infinite 0.4s; --to: 0.22; }
+
+/* data */
+.fv-line { stroke: rgba(125, 179, 255, 0.5); stroke-width: 2; stroke-dasharray: 6 6; fill: none; animation: fvflow 1.2s linear infinite; }
+.fv-nodes circle { fill: #0a1226; stroke: #5fe3c9; stroke-width: 2.4; }
+.fv-packet { fill: #ffc47a; filter: drop-shadow(0 0 6px #ffc47a); animation: fvpacket 3.2s ease-in-out infinite; }
+.fv-packet.p2 { animation-delay: 1.6s; fill: #7db3ff; }
+@keyframes fvpacket { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(280px); opacity: 0; } }
+.fv-chart rect { fill: #7db3ff; opacity: 0.85; transform-box: fill-box; transform-origin: bottom center; animation: fvbars 3.6s ease-in-out infinite; }
+.fv-chart rect:nth-child(1) { animation-delay: 0s; --h: 0.5; } .fv-chart rect:nth-child(2) { animation-delay: 0.15s; --h: 0.8; }
+.fv-chart rect:nth-child(3) { animation-delay: 0.3s; --h: 0.6; } .fv-chart rect:nth-child(4) { animation-delay: 0.45s; --h: 1; } .fv-chart rect:nth-child(5) { animation-delay: 0.6s; --h: 0.7; }
+@keyframes fvbars { 0% { transform: scaleY(0.1); } 45%, 100% { transform: scaleY(var(--h, 0.8)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .f-pane.is-on, .f-pane.is-on .f-copy > *, .f-tags li { animation: none; }
+  .f-tab.is-on .f-bar { animation: none; width: 100%; }
+  .f-pane svg * { animation: none !important; }
+}
+
+@media (max-width: 1000px) {
+  .focus { grid-template-columns: minmax(0, 1fr); }
+  .f-tabs {
+    display: flex;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  .f-tabs::-webkit-scrollbar { display: none; }
+  .f-tabs li { flex: none; }
+  .f-tab { white-space: nowrap; width: auto; }
+  .f-tab:hover, .f-tab.is-on { transform: none; }
+  .f-view { min-height: 0; }
+}
+
+@media (max-width: 700px) {
+  .f-pane { grid-template-columns: minmax(0, 1fr); padding: 18px; gap: 18px; }
+}
+
+/* Hero description: a narrower text column */
+.lede {
+  max-width: 42ch;
+}
+
+.lede { text-wrap: balance; }
+
+:root[data-theme="light"] .f-tabs {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:root[data-theme="light"] .f-tags li {
+  background: rgba(255, 255, 255, 0.7);
+}
+
 </style>
 </head>
 
@@ -3833,8 +4127,8 @@ body {
         </div>
         <div class="about-body panel">
           <p class="big">
-            I work where perception, decision-making and language models meet: systems that reconstruct scenes from
-            photographs, learn policies from reward, and generate content from prompts.
+            I design, train and evaluate learning-based systems, with a research focus on how models perceive geometry,
+            optimise decisions under reward, and retain knowledge when they are fine-tuned.
           </p>
           <p>
             Core stack is Python, Java and web technologies, with TensorFlow, scikit-learn, OpenCV, Pandas and NumPy for model
@@ -3853,28 +4147,81 @@ body {
       </div>
 
       <div class="wrap">
-        <ul class="profile">
-          <li class="panel" style="--c:#7db3ff">
-            <span class="pf-k">01</span>
-            <h3>Computer vision</h3>
-            <p>Geometry-driven pipelines: camera calibration, SIFT and FLANN feature matching, and 3D reconstruction from overlapping photographs.</p>
-          </li>
-          <li class="panel" style="--c:#ffbf75">
-            <span class="pf-k">02</span>
-            <h3>Reinforcement learning</h3>
-            <p>Agents that learn reward-maximising policies in grid-world environments such as CliffBoxPushing.</p>
-          </li>
-          <li class="panel" style="--c:#b58cff">
-            <span class="pf-k">03</span>
-            <h3>Language &amp; generative AI</h3>
-            <p>LLM applications, retrieval-augmented generation, Hugging Face Transformers, and a study of catastrophic forgetting in fine-tuned models.</p>
-          </li>
-          <li class="panel" style="--c:#5fe3c9">
-            <span class="pf-k">04</span>
-            <h3>Data &amp; engineering</h3>
-            <p>Preprocessing, exploratory analysis and feature extraction, delivered as Python and Flask applications.</p>
-          </li>
-        </ul>
+        <div class="focus panel" id="focus" style="--c:#7db3ff" aria-label="Areas of focus">
+          <ul class="f-tabs"><li><button type="button" class="f-tab is-on" data-i="0"><b>01</b><span>Computer vision</span><i class="f-bar"></i></button></li><li><button type="button" class="f-tab" data-i="1"><b>02</b><span>Reinforcement learning</span><i class="f-bar"></i></button></li><li><button type="button" class="f-tab" data-i="2"><b>03</b><span>Generative AI</span><i class="f-bar"></i></button></li><li><button type="button" class="f-tab" data-i="3"><b>04</b><span>Large language models</span><i class="f-bar"></i></button></li><li><button type="button" class="f-tab" data-i="4"><b>05</b><span>Natural language processing</span><i class="f-bar"></i></button></li><li><button type="button" class="f-tab" data-i="5"><b>06</b><span>Data &amp; engineering</span><i class="f-bar"></i></button></li></ul>
+          <div class="f-view"><div class="f-pane is-on" data-i="0">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <rect class="fv-frame" x="24" y="40" width="120" height="130" rx="8" />
+                <polygon class="fv-frame" points="216,56 336,38 336,182 216,164" />
+                <rect class="fv-scan" x="24" y="40" width="120" height="3" />
+                <g class="fv-kp"><circle cx="52" cy="76" r="4"/><circle cx="92" cy="70" r="4"/><circle cx="70" cy="112" r="4"/><circle cx="112" cy="132" r="4"/><circle cx="46" cy="146" r="4"/></g>
+                <g class="fv-kp k2"><circle cx="244" cy="84" r="4"/><circle cx="286" cy="72" r="4"/><circle cx="264" cy="116" r="4"/><circle cx="312" cy="126" r="4"/><circle cx="250" cy="150" r="4"/></g>
+                <g class="fv-match"><line x1="52" y1="76" x2="244" y2="84"/><line x1="92" y1="70" x2="286" y2="72"/><line x1="70" y1="112" x2="264" y2="116"/><line x1="112" y1="132" x2="312" y2="126"/><line x1="46" y1="146" x2="250" y2="150"/></g>
+                <text x="180" y="208" text-anchor="middle" class="fv-cap">feature matching across views</text>
+              </svg></div>
+              <div class="f-copy"><h3>Computer vision</h3><p>Geometry-driven pipelines: camera calibration, SIFT and FLANN feature matching, and 3D reconstruction from 300 to 500 overlapping photographs of an NTU building.</p><ul class="f-tags"><li style="--n:0">OpenCV</li><li style="--n:1">SIFT</li><li style="--n:2">FLANN</li><li style="--n:3">Calibration</li></ul></div>
+            </div><div class="f-pane" data-i="1">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <g class="fv-grid"><rect x="40" y="20" width="280" height="160" rx="6"/>
+                  <path d="M80 20V180M120 20V180M160 20V180M200 20V180M240 20V180M280 20V180M40 60H320M40 100H320M40 140H320"/></g>
+                <rect class="fv-cliff" x="40" y="140" width="280" height="40" rx="0"/>
+                <text x="180" y="165" text-anchor="middle" class="fv-cap warn">cliff</text>
+                <path class="fv-flag" d="M302 28v28M302 28l16 7-16 7"/>
+                <polyline class="fv-trail" points="60,120 100,120 140,120 140,80 180,80 220,80 260,80 260,40 300,40" />
+                <circle class="fv-agent" cx="60" cy="120" r="9" />
+                <text x="180" y="208" text-anchor="middle" class="fv-cap">policy learned from reward</text>
+              </svg></div>
+              <div class="f-copy"><h3>Reinforcement learning</h3><p>Agents that learn reward-maximising policies, built and evaluated on the CliffBoxPushing grid-world.</p><ul class="f-tags"><li style="--n:0">Policy learning</li><li style="--n:1">Grid-world</li></ul></div>
+            </div><div class="f-pane" data-i="2">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <rect class="fv-frame" x="24" y="18" width="312" height="36" rx="18" />
+                <clipPath id="fvType"><rect class="fv-type" x="40" y="18" width="260" height="36" /></clipPath>
+                <text x="44" y="42" class="fv-mono" clip-path="url(#fvType)">a glowing city at dusk, oil painting</text>
+                <rect class="fv-caret" x="44" y="28" width="2" height="16" />
+                <g class="fv-tiles">
+                  <rect x="24" y="72" width="96" height="62" rx="8" style="fill:#b58cff"/><rect x="132" y="72" width="96" height="62" rx="8" style="fill:#7db3ff"/><rect x="240" y="72" width="96" height="62" rx="8" style="fill:#ffbf75"/>
+                  <rect x="24" y="144" width="96" height="62" rx="8" style="fill:#5fe3c9"/><rect x="132" y="144" width="96" height="62" rx="8" style="fill:#ff8fb1"/><rect x="240" y="144" width="96" height="62" rx="8" style="fill:#8be28b"/>
+                </g>
+                <path class="fv-spark" d="M300 100l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" />
+              </svg></div>
+              <div class="f-copy"><h3>Generative AI</h3><p>Prompt-driven image generation through LLMs and generative APIs, speech-to-sign-language visuals, and a hands-on Generative AI certification.</p><ul class="f-tags"><li style="--n:0">Generative APIs</li><li style="--n:1">Hugging Face</li><li style="--n:2">Flask</li></ul></div>
+            </div><div class="f-pane" data-i="3">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <g class="fv-tokens">
+                  <rect x="14" y="110" width="46" height="30" rx="7"/><rect x="66" y="110" width="62" height="30" rx="7"/><rect x="134" y="110" width="52" height="30" rx="7"/><rect x="192" y="110" width="40" height="30" rx="7"/><rect x="238" y="110" width="58" height="30" rx="7"/><rect x="302" y="110" width="40" height="30" rx="7"/>
+                  <text x="37" y="130" text-anchor="middle">The</text><text x="97" y="130" text-anchor="middle">model</text><text x="160" y="130" text-anchor="middle">keeps</text><text x="212" y="130" text-anchor="middle">old</text><text x="267" y="130" text-anchor="middle">skills</text><text x="322" y="130" text-anchor="middle">…</text>
+                </g>
+                <g class="fv-arcs"><path d="M322 108C322 40 97 40 97 108"/><path d="M322 108C322 62 160 62 160 108"/><path d="M322 108C322 78 267 78 267 108"/></g>
+                <text x="24" y="170" class="fv-cap">old skills</text><rect class="fv-barbg" x="100" y="161" width="236" height="9" rx="4.5"/><rect class="fv-bar b1" x="100" y="161" width="236" height="9" rx="4.5"/>
+                <text x="24" y="196" class="fv-cap">new task</text><rect class="fv-barbg" x="100" y="187" width="236" height="9" rx="4.5"/><rect class="fv-bar b2" x="100" y="187" width="236" height="9" rx="4.5"/>
+                <text x="180" y="30" text-anchor="middle" class="fv-cap">attention · KL anchor</text>
+              </svg></div>
+              <div class="f-copy"><h3>Large language models</h3><p>Fine-tuning behaviour and retention: vulnerability-guided KL anchoring against catastrophic forgetting, evaluated on google/gemma-3-1b-it, alongside model API integration and AI workflows.</p><ul class="f-tags"><li style="--n:0">KL anchoring</li><li style="--n:1">gemma-3-1b-it</li><li style="--n:2">RAG</li><li style="--n:3">Model APIs</li></ul></div>
+            </div><div class="f-pane" data-i="4">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <g class="fv-doc"><rect class="fv-frame" x="24" y="50" width="96" height="120" rx="8"/><path d="M40 78h64M40 98h50M40 118h64M40 138h38"/></g>
+                <path class="fv-flow" d="M126 110H168" />
+                <circle class="fv-node" cx="196" cy="110" r="26" />
+                <text x="196" y="115" text-anchor="middle" class="fv-mono sm">NLP</text>
+                <path class="fv-flow" d="M226 110H252" />
+                <g class="fv-labels"><text x="256" y="72">A</text><text x="256" y="112">B</text><text x="256" y="152">C</text>
+                  <rect class="fv-barbg" x="272" y="63" width="64" height="9" rx="4.5"/><rect class="fv-bar l1" x="272" y="63" width="64" height="9" rx="4.5"/>
+                  <rect class="fv-barbg" x="272" y="103" width="64" height="9" rx="4.5"/><rect class="fv-bar l2" x="272" y="103" width="64" height="9" rx="4.5"/>
+                  <rect class="fv-barbg" x="272" y="143" width="64" height="9" rx="4.5"/><rect class="fv-bar l3" x="272" y="143" width="64" height="9" rx="4.5"/></g>
+                <text x="180" y="208" text-anchor="middle" class="fv-cap">text to label · accuracy and F1</text>
+              </svg></div>
+              <div class="f-copy"><h3>Natural language processing</h3><p>A supervised classifier that sorts text into predefined categories, validated with accuracy and F1-score, and speech recognition feeding sign-language translation.</p><ul class="f-tags"><li style="--n:0">Text classification</li><li style="--n:1">F1-score</li><li style="--n:2">Speech recognition</li></ul></div>
+            </div><div class="f-pane" data-i="5">
+              <div class="f-vis"><svg class="fv" viewBox="0 0 360 220" aria-hidden="true">
+                <path class="fv-line" d="M40 60H320" />
+                <g class="fv-nodes"><circle cx="40" cy="60" r="11"/><circle cx="110" cy="60" r="11"/><circle cx="180" cy="60" r="11"/><circle cx="250" cy="60" r="11"/><circle cx="320" cy="60" r="11"/></g>
+                <circle class="fv-packet" cx="40" cy="60" r="5" /><circle class="fv-packet p2" cx="40" cy="60" r="5" />
+                <text x="40" y="94" text-anchor="middle" class="fv-cap">clean</text><text x="110" y="94" text-anchor="middle" class="fv-cap">prepare</text><text x="180" y="94" text-anchor="middle" class="fv-cap">explore</text><text x="250" y="94" text-anchor="middle" class="fv-cap">transform</text><text x="320" y="94" text-anchor="middle" class="fv-cap">extract</text>
+                <g class="fv-chart"><rect x="60" y="130" width="34" height="60" rx="4"/><rect x="112" y="130" width="34" height="60" rx="4"/><rect x="164" y="130" width="34" height="60" rx="4"/><rect x="216" y="130" width="34" height="60" rx="4"/><rect x="268" y="130" width="34" height="60" rx="4"/></g>
+              </svg></div>
+              <div class="f-copy"><h3>Data &amp; engineering</h3><p>Preprocessing, exploratory analysis, feature transformation and extraction, delivered as Python and Flask applications.</p><ul class="f-tags"><li style="--n:0">Pandas</li><li style="--n:1">NumPy</li><li style="--n:2">EDA</li><li style="--n:3">Feature extraction</li></ul></div>
+            </div></div>
+        </div>
       </div>
     </section>
 
@@ -4000,7 +4347,7 @@ body {
         <div class="bento">
           <div class="panel box b-ai" style="--c:#b58cff">
             <h3><svg xmlns="http://www.w3.org/2000/svg" class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M9 13a4.5 4.5 0 0 0 3-4" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M12 13h4" /> <path d="M12 18h6a2 2 0 0 1 2 2v1" /> <path d="M12 8h8" /> <path d="M16 8V5a2 2 0 0 1 2-2" /> <circle cx="16" cy="13" r=".5" /> <circle cx="18" cy="3" r=".5" /> <circle cx="20" cy="21" r=".5" /> <circle cx="20" cy="8" r=".5" /> </svg> AI &amp; Machine Learning</h3>
-            <ul class="tiles tiles-ai"><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t21118" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e5bff"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t21118)"/><rect x="26" y="12" width="68" height="48" rx="6" fill="#fff" opacity=".92"/><polygon points="26,60 48,34 62,48 74,38 94,60" fill="#7a4cd6"/><circle cx="78" cy="26" r="6" fill="#ffbf75"/><path d="M104 10l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM12 44l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#fff"/></svg></span><span class="tname">Generative AI</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t22857" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d5afe"/><stop offset="1" stop-color="#6ec1ff"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t22857)"/><rect x="10" y="9" width="62" height="24" rx="9" fill="#fff" opacity=".95"/><rect x="18" y="16" width="40" height="3.5" rx="1.7" fill="#4a5bd6"/><rect x="18" y="23" width="26" height="3.5" rx="1.7" fill="#4a5bd6" opacity=".5"/><rect x="48" y="39" width="62" height="24" rx="9" fill="#0b1b44" opacity=".85"/><rect x="56" y="46" width="42" height="3.5" rx="1.7" fill="#bcd0ff"/><circle cx="58" cy="57" r="2" fill="#7db3ff"/><circle cx="65" cy="57" r="2" fill="#7db3ff" opacity=".7"/><circle cx="72" cy="57" r="2" fill="#7db3ff" opacity=".4"/></svg></span><span class="tname">LLMs</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t7515" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14c8b4"/><stop offset="1" stop-color="#2a63e6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t7515)"/><rect x="14" y="10" width="92" height="52" rx="6" fill="#0b2b3a" opacity=".55"/><circle cx="46" cy="30" r="7" fill="#ffd58a"/><path d="M34 54c0-12 24-12 24 0z" fill="#ffd58a"/><rect x="30" y="18" width="32" height="38" rx="3" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 3"/><rect x="30" y="10" width="34" height="8" rx="2" fill="#fff"/><rect x="34" y="13" width="22" height="2.4" rx="1.2" fill="#0b6c7a"/><rect x="72" y="34" width="26" height="20" rx="3" fill="none" stroke="#ffbf75" stroke-width="1.8"/><circle cx="85" cy="44" r="4" fill="#ffbf75"/></svg></span><span class="tname">Computer Vision</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t12543" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb300"/><stop offset="1" stop-color="#ef4d3c"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t12543)"/><g stroke="#fff" stroke-opacity=".45" stroke-width="1"><path d="M16 12H104M16 28H104M16 44H104M16 12V60M38 12V60M60 12V60M82 12V60M104 12V60"/></g><rect x="16" y="44" width="88" height="16" fill="#3a1a00" opacity=".45"/><path d="M27 36L49 36L49 20L71 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-dasharray="4 3"/><circle cx="27" cy="36" r="6" fill="#fff"/><circle cx="27" cy="36" r="2.4" fill="#e85d04"/><path d="M82 28V10M82 10l14 5-14 5z" fill="#fff" stroke="#fff" stroke-width="2"/></svg></span><span class="tname">Reinforcement Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t68957" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f9c"/><stop offset="1" stop-color="#7b3fe4"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t68957)"/><g stroke="#fff" stroke-opacity=".4" stroke-width="1"><path d="M22 18L52 12M22 18L52 32M22 18L52 52M22 36L52 12M22 36L52 32M22 36L52 52M22 54L52 12M22 54L52 32M22 54L52 52M52 12L82 24M52 12L82 48M52 32L82 24M52 32L82 48M52 52L82 24M52 52L82 48M82 24L102 36M82 48L102 36"/></g><g fill="#fff"><circle cx="22" cy="18" r="5"/><circle cx="22" cy="36" r="5"/><circle cx="22" cy="54" r="5"/><circle cx="52" cy="12" r="5" fill="#9ae6ff"/><circle cx="52" cy="32" r="5" fill="#9ae6ff"/><circle cx="52" cy="52" r="5" fill="#9ae6ff"/><circle cx="82" cy="24" r="5"/><circle cx="82" cy="48" r="5"/><circle cx="102" cy="36" r="6" fill="#ffbf75"/></g></svg></span><span class="tname">Deep Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t92167" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12b886"/><stop offset="1" stop-color="#1c7ed6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t92167)"/><path d="M14 58L106 14" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"/><g fill="#fff"><circle cx="24" cy="44" r="4"/><circle cx="38" cy="34" r="4"/><circle cx="30" cy="54" r="4"/><circle cx="50" cy="44" r="4"/><circle cx="46" cy="58" r="4"/><circle cx="58" cy="52" r="4"/></g><g fill="#ffd166"><circle cx="64" cy="22" r="4"/><circle cx="78" cy="30" r="4"/><circle cx="90" cy="20" r="4"/><circle cx="82" cy="42" r="4"/><circle cx="100" cy="34" r="4"/><circle cx="70" cy="12" r="4"/></g></svg></span><span class="tname">Machine Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t5016" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6336c"/><stop offset="1" stop-color="#7048e8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t5016)"/><rect x="12" y="12" width="96" height="48" rx="8" fill="#fff" opacity=".93"/><g font-family="monospace" font-size="9" font-weight="700"><text x="20" y="30" fill="#3a2a66">The</text><text x="40" y="30" fill="#d6336c">model</text><text x="72" y="30" fill="#3a2a66">reads</text><text x="20" y="48" fill="#3a2a66">every</text><text x="52" y="48" fill="#1c7ed6">word</text></g><rect x="38" y="33" width="30" height="3" rx="1.5" fill="#d6336c"/><rect x="50" y="51" width="28" height="3" rx="1.5" fill="#1c7ed6"/></svg></span><span class="tname">NLP</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t42799" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15aabf"/><stop offset="1" stop-color="#364fc7"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t42799)"/><rect x="10" y="14" width="26" height="34" rx="3" fill="#fff" opacity=".6"/><rect x="16" y="20" width="26" height="34" rx="3" fill="#fff" opacity=".85"/><rect x="21" y="27" width="16" height="2.6" rx="1.3" fill="#1971c2"/><rect x="21" y="33" width="12" height="2.6" rx="1.3" fill="#1971c2" opacity=".5"/><circle cx="64" cy="34" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M72 42l9 9" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><rect x="84" y="14" width="28" height="26" rx="8" fill="#0b1b44" opacity=".85"/><rect x="89" y="21" width="18" height="3" rx="1.5" fill="#9ae6ff"/><rect x="89" y="28" width="12" height="3" rx="1.5" fill="#9ae6ff" opacity=".6"/></svg></span><span class="tname">RAG</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t25423" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb703"/><stop offset="1" stop-color="#fb8500"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t25423)"/><g transform="translate(34 3) scale(.98)"><circle cx="26" cy="33" r="25" fill="#FFD21E" stroke="#fff" stroke-width="3"/><ellipse cx="18" cy="28" rx="3" ry="4" fill="#3A3B45"/><ellipse cx="34" cy="28" rx="3" ry="4" fill="#3A3B45"/><path d="M13 40c3 9 23 9 26 0" fill="#7A2B2B" stroke="#3A3B45" stroke-width="2.2" stroke-linecap="round"/><path d="M20 45c2 3 10 3 12 0" fill="#FF6B7A"/><circle cx="6" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/><circle cx="46" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/></g></svg></span><span class="tname">Hugging Face Transformers</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t45087" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#364156"/><stop offset="1" stop-color="#12b8a6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t45087)"/><rect x="12" y="10" width="62" height="52" rx="6" fill="#0a1226" opacity=".88"/><g font-family="monospace" font-size="7.5"><text x="18" y="24" fill="#7db3ff">POST /v1/chat</text><text x="18" y="35" fill="#ffd58a">{"q": "…"}</text><text x="18" y="46" fill="#5fe3c9">→ 200 OK</text></g><path d="M78 36H98" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/><path d="M98 30l8 6-8 6z" fill="#fff"/><circle cx="110" cy="20" r="3" fill="#fff"/></svg></span><span class="tname">Model API Integration</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t34092" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e0407a"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t34092)"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M32 36H48M70 36L84 20M70 36L84 52"/></g><rect x="12" y="26" width="20" height="20" rx="6" fill="#fff"/><rect x="48" y="26" width="22" height="20" rx="6" fill="#fff"/><rect x="84" y="10" width="22" height="20" rx="6" fill="#ffe3a8"/><rect x="84" y="42" width="22" height="20" rx="6" fill="#ffe3a8"/><circle cx="22" cy="36" r="3.4" fill="#e8590c"/><path d="M54 36h10M59 31v10" stroke="#e8590c" stroke-width="2.2"/></svg></span><span class="tname">AI Workflows</span></li></ul>
+            <ul class="tiles tiles-ai"><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t90109" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e5bff"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t90109)"/><rect x="26" y="12" width="68" height="48" rx="6" fill="#fff" opacity=".92"/><polygon points="26,60 48,34 62,48 74,38 94,60" fill="#7a4cd6"/><circle cx="78" cy="26" r="6" fill="#ffbf75"/><path d="M104 10l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM12 44l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#fff"/></svg></span><span class="tname">Generative AI</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t41783" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d5afe"/><stop offset="1" stop-color="#6ec1ff"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t41783)"/><rect x="10" y="9" width="62" height="24" rx="9" fill="#fff" opacity=".95"/><rect x="18" y="16" width="40" height="3.5" rx="1.7" fill="#4a5bd6"/><rect x="18" y="23" width="26" height="3.5" rx="1.7" fill="#4a5bd6" opacity=".5"/><rect x="48" y="39" width="62" height="24" rx="9" fill="#0b1b44" opacity=".85"/><rect x="56" y="46" width="42" height="3.5" rx="1.7" fill="#bcd0ff"/><circle cx="58" cy="57" r="2" fill="#7db3ff"/><circle cx="65" cy="57" r="2" fill="#7db3ff" opacity=".7"/><circle cx="72" cy="57" r="2" fill="#7db3ff" opacity=".4"/></svg></span><span class="tname">LLMs</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t72017" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14c8b4"/><stop offset="1" stop-color="#2a63e6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t72017)"/><rect x="14" y="10" width="92" height="52" rx="6" fill="#0b2b3a" opacity=".55"/><circle cx="46" cy="30" r="7" fill="#ffd58a"/><path d="M34 54c0-12 24-12 24 0z" fill="#ffd58a"/><rect x="30" y="18" width="32" height="38" rx="3" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 3"/><rect x="30" y="10" width="34" height="8" rx="2" fill="#fff"/><rect x="34" y="13" width="22" height="2.4" rx="1.2" fill="#0b6c7a"/><rect x="72" y="34" width="26" height="20" rx="3" fill="none" stroke="#ffbf75" stroke-width="1.8"/><circle cx="85" cy="44" r="4" fill="#ffbf75"/></svg></span><span class="tname">Computer Vision</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t39115" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb300"/><stop offset="1" stop-color="#ef4d3c"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t39115)"/><g stroke="#fff" stroke-opacity=".45" stroke-width="1"><path d="M16 12H104M16 28H104M16 44H104M16 12V60M38 12V60M60 12V60M82 12V60M104 12V60"/></g><rect x="16" y="44" width="88" height="16" fill="#3a1a00" opacity=".45"/><path d="M27 36L49 36L49 20L71 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-dasharray="4 3"/><circle cx="27" cy="36" r="6" fill="#fff"/><circle cx="27" cy="36" r="2.4" fill="#e85d04"/><path d="M82 28V10M82 10l14 5-14 5z" fill="#fff" stroke="#fff" stroke-width="2"/></svg></span><span class="tname">Reinforcement Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t9383" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f9c"/><stop offset="1" stop-color="#7b3fe4"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t9383)"/><g stroke="#fff" stroke-opacity=".4" stroke-width="1"><path d="M22 18L52 12M22 18L52 32M22 18L52 52M22 36L52 12M22 36L52 32M22 36L52 52M22 54L52 12M22 54L52 32M22 54L52 52M52 12L82 24M52 12L82 48M52 32L82 24M52 32L82 48M52 52L82 24M52 52L82 48M82 24L102 36M82 48L102 36"/></g><g fill="#fff"><circle cx="22" cy="18" r="5"/><circle cx="22" cy="36" r="5"/><circle cx="22" cy="54" r="5"/><circle cx="52" cy="12" r="5" fill="#9ae6ff"/><circle cx="52" cy="32" r="5" fill="#9ae6ff"/><circle cx="52" cy="52" r="5" fill="#9ae6ff"/><circle cx="82" cy="24" r="5"/><circle cx="82" cy="48" r="5"/><circle cx="102" cy="36" r="6" fill="#ffbf75"/></g></svg></span><span class="tname">Deep Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t25905" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12b886"/><stop offset="1" stop-color="#1c7ed6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t25905)"/><path d="M14 58L106 14" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"/><g fill="#fff"><circle cx="24" cy="44" r="4"/><circle cx="38" cy="34" r="4"/><circle cx="30" cy="54" r="4"/><circle cx="50" cy="44" r="4"/><circle cx="46" cy="58" r="4"/><circle cx="58" cy="52" r="4"/></g><g fill="#ffd166"><circle cx="64" cy="22" r="4"/><circle cx="78" cy="30" r="4"/><circle cx="90" cy="20" r="4"/><circle cx="82" cy="42" r="4"/><circle cx="100" cy="34" r="4"/><circle cx="70" cy="12" r="4"/></g></svg></span><span class="tname">Machine Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t67011" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6336c"/><stop offset="1" stop-color="#7048e8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t67011)"/><rect x="12" y="12" width="96" height="48" rx="8" fill="#fff" opacity=".93"/><g font-family="monospace" font-size="9" font-weight="700"><text x="20" y="30" fill="#3a2a66">The</text><text x="40" y="30" fill="#d6336c">model</text><text x="72" y="30" fill="#3a2a66">reads</text><text x="20" y="48" fill="#3a2a66">every</text><text x="52" y="48" fill="#1c7ed6">word</text></g><rect x="38" y="33" width="30" height="3" rx="1.5" fill="#d6336c"/><rect x="50" y="51" width="28" height="3" rx="1.5" fill="#1c7ed6"/></svg></span><span class="tname">NLP</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t68089" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15aabf"/><stop offset="1" stop-color="#364fc7"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t68089)"/><rect x="10" y="14" width="26" height="34" rx="3" fill="#fff" opacity=".6"/><rect x="16" y="20" width="26" height="34" rx="3" fill="#fff" opacity=".85"/><rect x="21" y="27" width="16" height="2.6" rx="1.3" fill="#1971c2"/><rect x="21" y="33" width="12" height="2.6" rx="1.3" fill="#1971c2" opacity=".5"/><circle cx="64" cy="34" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M72 42l9 9" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><rect x="84" y="14" width="28" height="26" rx="8" fill="#0b1b44" opacity=".85"/><rect x="89" y="21" width="18" height="3" rx="1.5" fill="#9ae6ff"/><rect x="89" y="28" width="12" height="3" rx="1.5" fill="#9ae6ff" opacity=".6"/></svg></span><span class="tname">RAG</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t52391" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb703"/><stop offset="1" stop-color="#fb8500"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t52391)"/><g transform="translate(34 3) scale(.98)"><circle cx="26" cy="33" r="25" fill="#FFD21E" stroke="#fff" stroke-width="3"/><ellipse cx="18" cy="28" rx="3" ry="4" fill="#3A3B45"/><ellipse cx="34" cy="28" rx="3" ry="4" fill="#3A3B45"/><path d="M13 40c3 9 23 9 26 0" fill="#7A2B2B" stroke="#3A3B45" stroke-width="2.2" stroke-linecap="round"/><path d="M20 45c2 3 10 3 12 0" fill="#FF6B7A"/><circle cx="6" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/><circle cx="46" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/></g></svg></span><span class="tname">Hugging Face Transformers</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t71318" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#364156"/><stop offset="1" stop-color="#12b8a6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t71318)"/><rect x="12" y="10" width="62" height="52" rx="6" fill="#0a1226" opacity=".88"/><g font-family="monospace" font-size="7.5"><text x="18" y="24" fill="#7db3ff">POST /v1/chat</text><text x="18" y="35" fill="#ffd58a">{"q": "…"}</text><text x="18" y="46" fill="#5fe3c9">→ 200 OK</text></g><path d="M78 36H98" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/><path d="M98 30l8 6-8 6z" fill="#fff"/><circle cx="110" cy="20" r="3" fill="#fff"/></svg></span><span class="tname">Model API Integration</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t76282" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e0407a"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t76282)"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M32 36H48M70 36L84 20M70 36L84 52"/></g><rect x="12" y="26" width="20" height="20" rx="6" fill="#fff"/><rect x="48" y="26" width="22" height="20" rx="6" fill="#fff"/><rect x="84" y="10" width="22" height="20" rx="6" fill="#ffe3a8"/><rect x="84" y="42" width="22" height="20" rx="6" fill="#ffe3a8"/><circle cx="22" cy="36" r="3.4" fill="#e8590c"/><path d="M54 36h10M59 31v10" stroke="#e8590c" stroke-width="2.2"/></svg></span><span class="tname">AI Workflows</span></li></ul>
           </div>
 
           <div class="panel box b-lang" style="--c:#ffbf75">
@@ -5207,6 +5554,41 @@ if ("IntersectionObserver" in window) {
 
   if (img.complete && img.naturalWidth) run(); else img.addEventListener("load", run, { once: true });
   frame.addEventListener("click", run);
+})();
+
+/* ---------- 7c. About: moving focus board ---------- */
+(function focusBoard() {
+  const box = document.getElementById("focus");
+  if (!box) return;
+  const tabs = [...box.querySelectorAll(".f-tab")];
+  const panes = [...box.querySelectorAll(".f-pane")];
+  const DUR = 5000;
+  let i = 0, timer = null;
+  box.style.setProperty("--dur", DUR + "ms");
+
+  function show(n) {
+    i = (n + tabs.length) % tabs.length;
+    tabs.forEach((t, k) => t.classList.toggle("is-on", k === i));
+    panes.forEach((p, k) => p.classList.toggle("is-on", k === i));
+  }
+  function play() {
+    clearInterval(timer);
+    if (reduceMotion) return;
+    timer = setInterval(() => show(i + 1), DUR);
+  }
+  tabs.forEach((t, k) => t.addEventListener("click", () => {
+    show(k);
+    box.classList.remove("is-paused");
+    play();
+  }));
+  box.addEventListener("mouseenter", () => { box.classList.add("is-paused"); clearInterval(timer); });
+  box.addEventListener("mouseleave", () => {
+    box.classList.remove("is-paused");
+    const bar = box.querySelector(".f-tab.is-on");
+    show(i);
+    play();
+  });
+  play();
 })();
 
 /* ---------- 8. Copy email ---------- */
