@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hariharan B | AI Engineer Portfolio</title>
-  <meta name="description" content="Hariharan B is an AI developer pursuing an MSc in Artificial Intelligence at NTU Singapore, currently focused on computer vision and reinforcement learning, and interested in all areas of AI development. Projects, skills and contact details." />
+  <meta name="description" content="Hariharan B is an AI engineer pursuing an MSc in Artificial Intelligence at NTU Singapore, currently focused on computer vision and reinforcement learning, and interested in all areas of AI development. Projects, skills and contact details." />
   <meta name="theme-color" content="#0B1A3B" />
   <meta property="og:title" content="Hariharan B | AI Engineer Portfolio" />
   <meta property="og:description" content="MSc Artificial Intelligence at NTU Singapore. Computer vision and reinforcement learning, with an interest in all of AI development." />
@@ -3313,6 +3313,75 @@ body {
   }
 }
 
+
+/* Certificate text: split-flap letters */
+.cert-side {
+  perspective: 600px;
+}
+
+.cert-side .w {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cert-side .ch {
+  display: inline-block;
+  text-align: center;
+  border-radius: 2px;
+  transform-origin: 50% 50%;
+}
+
+.cert-side .ch.wait {
+  opacity: 0;
+}
+
+.cert-side .ch.fa,
+.cert-side .ch.fb {
+  color: var(--teal);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 50%, rgba(0, 0, 0, 0.22) 50%);
+}
+
+.cert-side .ch.fa { animation: flapA 0.11s ease-in; }
+.cert-side .ch.fb { animation: flapB 0.11s ease-in; }
+
+@keyframes flapA {
+  from { transform: rotateX(-85deg); }
+  to { transform: rotateX(0); }
+}
+
+@keyframes flapB {
+  from { transform: rotateX(-85deg); }
+  to { transform: rotateX(0); }
+}
+
+.cert-side .ch.land {
+  animation: land 0.35s ease-out;
+}
+
+@keyframes land {
+  0% { color: var(--teal); transform: rotateX(-60deg); }
+  100% { color: inherit; transform: rotateX(0); }
+}
+
+/* Smaller portrait */
+.hero-grid {
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 29vw, 350px);
+}
+
+@media (min-width: 561px) and (max-width: 700px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(120px, 32vw, 170px);
+  }
+}
+
+@media (max-width: 1000px) {
+  .photo { width: min(46vw, 280px); }
+}
+
+@media (max-width: 560px) {
+  .photo { width: min(58vw, 240px); }
+}
+
 </style>
 </head>
 
@@ -3426,9 +3495,9 @@ body {
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1 class="name">Hariharan B</h1>
-          <p class="role">Software Developer &amp; AI Engineer</p>
+          <p class="role">AI Engineer</p>
           <p class="lede">
-            Going deep on computer vision and reinforcement learning at NTU Singapore, and building across every part of applied AI.
+            Building learning-based systems across computer vision, reinforcement learning, NLP and LLMs. MSc in Artificial Intelligence at NTU Singapore.
           </p>
 
           <div class="cta-row">
@@ -3483,7 +3552,7 @@ body {
           <h2>About</h2>
           <dl class="details panel">
             <div><dt>Name</dt><dd>Hariharan B</dd></div>
-            <div><dt>Role</dt><dd>Software Developer &amp; AI Engineer</dd></div>
+            <div><dt>Role</dt><dd>AI Engineer</dd></div>
             <div><dt>Based in</dt><dd>Singapore</dd></div>
             <div><dt>Email</dt><dd><a href="mailto:haribalucr7@gmail.com">haribalucr7@gmail.com</a></dd></div>
           </dl>
@@ -3495,18 +3564,19 @@ body {
         </div>
         <div class="about-body panel">
           <p class="big">
-            AI developer who enjoys building across the whole field, from generative AI and language models to intelligent
-            systems. Pursuing an MSc in Artificial Intelligence at NTU Singapore, where I am now focusing on computer
-            vision and reinforcement learning.
+            AI engineer building learning-based systems across computer vision, reinforcement learning, NLP and large
+            language models. MSc in Artificial Intelligence at NTU Singapore, currently specialising in computer vision
+            and reinforcement learning.
           </p>
           <p>
-            I have strong proficiency in Python, Java, and web technologies. My academic and project experience centers on
-            Generative AI, Large Language Models, and full-stack AI system development, and my graduate coursework adds
-            computer vision and reinforcement learning. I am curious about every area of AI development, not one niche.
+            Core stack is Python, Java and web technologies, with TensorFlow, scikit-learn, OpenCV, Pandas and NumPy for model
+            development and data work. Project experience spans generative AI, large language models and full-stack AI
+            systems, and graduate coursework adds computer vision and reinforcement learning, with an open interest in
+            every area of AI development.
           </p>
           <p>
-            I enjoy turning research methods into working systems for accessibility, automation and decision-making, and I
-            am working towards a professional career as an Artificial Intelligence Engineer.
+            I turn research-grade methods into working systems for accessibility, automation and decision-making, and I am
+            working towards a professional career as an Artificial Intelligence Engineer.
           </p>
 
           
@@ -3640,7 +3710,7 @@ body {
         <div class="bento">
           <div class="panel box b-ai" style="--c:#b58cff">
             <h3><svg xmlns="http://www.w3.org/2000/svg" class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M9 13a4.5 4.5 0 0 0 3-4" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M12 13h4" /> <path d="M12 18h6a2 2 0 0 1 2 2v1" /> <path d="M12 8h8" /> <path d="M16 8V5a2 2 0 0 1 2-2" /> <circle cx="16" cy="13" r=".5" /> <circle cx="18" cy="3" r=".5" /> <circle cx="20" cy="21" r=".5" /> <circle cx="20" cy="8" r=".5" /> </svg> AI &amp; Machine Learning</h3>
-            <ul class="tiles tiles-ai"><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t41456" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e5bff"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t41456)"/><rect x="26" y="12" width="68" height="48" rx="6" fill="#fff" opacity=".92"/><polygon points="26,60 48,34 62,48 74,38 94,60" fill="#7a4cd6"/><circle cx="78" cy="26" r="6" fill="#ffbf75"/><path d="M104 10l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM12 44l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#fff"/></svg></span><span class="tname">Generative AI</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t50189" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d5afe"/><stop offset="1" stop-color="#6ec1ff"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t50189)"/><rect x="10" y="9" width="62" height="24" rx="9" fill="#fff" opacity=".95"/><rect x="18" y="16" width="40" height="3.5" rx="1.7" fill="#4a5bd6"/><rect x="18" y="23" width="26" height="3.5" rx="1.7" fill="#4a5bd6" opacity=".5"/><rect x="48" y="39" width="62" height="24" rx="9" fill="#0b1b44" opacity=".85"/><rect x="56" y="46" width="42" height="3.5" rx="1.7" fill="#bcd0ff"/><circle cx="58" cy="57" r="2" fill="#7db3ff"/><circle cx="65" cy="57" r="2" fill="#7db3ff" opacity=".7"/><circle cx="72" cy="57" r="2" fill="#7db3ff" opacity=".4"/></svg></span><span class="tname">LLMs</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t32901" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14c8b4"/><stop offset="1" stop-color="#2a63e6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t32901)"/><rect x="14" y="10" width="92" height="52" rx="6" fill="#0b2b3a" opacity=".55"/><circle cx="46" cy="30" r="7" fill="#ffd58a"/><path d="M34 54c0-12 24-12 24 0z" fill="#ffd58a"/><rect x="30" y="18" width="32" height="38" rx="3" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 3"/><rect x="30" y="10" width="34" height="8" rx="2" fill="#fff"/><rect x="34" y="13" width="22" height="2.4" rx="1.2" fill="#0b6c7a"/><rect x="72" y="34" width="26" height="20" rx="3" fill="none" stroke="#ffbf75" stroke-width="1.8"/><circle cx="85" cy="44" r="4" fill="#ffbf75"/></svg></span><span class="tname">Computer Vision</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t86645" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb300"/><stop offset="1" stop-color="#ef4d3c"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t86645)"/><g stroke="#fff" stroke-opacity=".45" stroke-width="1"><path d="M16 12H104M16 28H104M16 44H104M16 12V60M38 12V60M60 12V60M82 12V60M104 12V60"/></g><rect x="16" y="44" width="88" height="16" fill="#3a1a00" opacity=".45"/><path d="M27 36L49 36L49 20L71 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-dasharray="4 3"/><circle cx="27" cy="36" r="6" fill="#fff"/><circle cx="27" cy="36" r="2.4" fill="#e85d04"/><path d="M82 28V10M82 10l14 5-14 5z" fill="#fff" stroke="#fff" stroke-width="2"/></svg></span><span class="tname">Reinforcement Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t53054" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f9c"/><stop offset="1" stop-color="#7b3fe4"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t53054)"/><g stroke="#fff" stroke-opacity=".4" stroke-width="1"><path d="M22 18L52 12M22 18L52 32M22 18L52 52M22 36L52 12M22 36L52 32M22 36L52 52M22 54L52 12M22 54L52 32M22 54L52 52M52 12L82 24M52 12L82 48M52 32L82 24M52 32L82 48M52 52L82 24M52 52L82 48M82 24L102 36M82 48L102 36"/></g><g fill="#fff"><circle cx="22" cy="18" r="5"/><circle cx="22" cy="36" r="5"/><circle cx="22" cy="54" r="5"/><circle cx="52" cy="12" r="5" fill="#9ae6ff"/><circle cx="52" cy="32" r="5" fill="#9ae6ff"/><circle cx="52" cy="52" r="5" fill="#9ae6ff"/><circle cx="82" cy="24" r="5"/><circle cx="82" cy="48" r="5"/><circle cx="102" cy="36" r="6" fill="#ffbf75"/></g></svg></span><span class="tname">Deep Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t50669" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12b886"/><stop offset="1" stop-color="#1c7ed6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t50669)"/><path d="M14 58L106 14" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"/><g fill="#fff"><circle cx="24" cy="44" r="4"/><circle cx="38" cy="34" r="4"/><circle cx="30" cy="54" r="4"/><circle cx="50" cy="44" r="4"/><circle cx="46" cy="58" r="4"/><circle cx="58" cy="52" r="4"/></g><g fill="#ffd166"><circle cx="64" cy="22" r="4"/><circle cx="78" cy="30" r="4"/><circle cx="90" cy="20" r="4"/><circle cx="82" cy="42" r="4"/><circle cx="100" cy="34" r="4"/><circle cx="70" cy="12" r="4"/></g></svg></span><span class="tname">Machine Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t96474" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6336c"/><stop offset="1" stop-color="#7048e8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t96474)"/><rect x="12" y="12" width="96" height="48" rx="8" fill="#fff" opacity=".93"/><g font-family="monospace" font-size="9" font-weight="700"><text x="20" y="30" fill="#3a2a66">The</text><text x="40" y="30" fill="#d6336c">model</text><text x="72" y="30" fill="#3a2a66">reads</text><text x="20" y="48" fill="#3a2a66">every</text><text x="52" y="48" fill="#1c7ed6">word</text></g><rect x="38" y="33" width="30" height="3" rx="1.5" fill="#d6336c"/><rect x="50" y="51" width="28" height="3" rx="1.5" fill="#1c7ed6"/></svg></span><span class="tname">NLP</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t13279" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15aabf"/><stop offset="1" stop-color="#364fc7"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t13279)"/><rect x="10" y="14" width="26" height="34" rx="3" fill="#fff" opacity=".6"/><rect x="16" y="20" width="26" height="34" rx="3" fill="#fff" opacity=".85"/><rect x="21" y="27" width="16" height="2.6" rx="1.3" fill="#1971c2"/><rect x="21" y="33" width="12" height="2.6" rx="1.3" fill="#1971c2" opacity=".5"/><circle cx="64" cy="34" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M72 42l9 9" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><rect x="84" y="14" width="28" height="26" rx="8" fill="#0b1b44" opacity=".85"/><rect x="89" y="21" width="18" height="3" rx="1.5" fill="#9ae6ff"/><rect x="89" y="28" width="12" height="3" rx="1.5" fill="#9ae6ff" opacity=".6"/></svg></span><span class="tname">RAG</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t73514" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb703"/><stop offset="1" stop-color="#fb8500"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t73514)"/><g transform="translate(34 3) scale(.98)"><circle cx="26" cy="33" r="25" fill="#FFD21E" stroke="#fff" stroke-width="3"/><ellipse cx="18" cy="28" rx="3" ry="4" fill="#3A3B45"/><ellipse cx="34" cy="28" rx="3" ry="4" fill="#3A3B45"/><path d="M13 40c3 9 23 9 26 0" fill="#7A2B2B" stroke="#3A3B45" stroke-width="2.2" stroke-linecap="round"/><path d="M20 45c2 3 10 3 12 0" fill="#FF6B7A"/><circle cx="6" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/><circle cx="46" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/></g></svg></span><span class="tname">Hugging Face Transformers</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t32034" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#364156"/><stop offset="1" stop-color="#12b8a6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t32034)"/><rect x="12" y="10" width="62" height="52" rx="6" fill="#0a1226" opacity=".88"/><g font-family="monospace" font-size="7.5"><text x="18" y="24" fill="#7db3ff">POST /v1/chat</text><text x="18" y="35" fill="#ffd58a">{"q": "…"}</text><text x="18" y="46" fill="#5fe3c9">→ 200 OK</text></g><path d="M78 36H98" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/><path d="M98 30l8 6-8 6z" fill="#fff"/><circle cx="110" cy="20" r="3" fill="#fff"/></svg></span><span class="tname">Model API Integration</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t37077" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e0407a"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t37077)"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M32 36H48M70 36L84 20M70 36L84 52"/></g><rect x="12" y="26" width="20" height="20" rx="6" fill="#fff"/><rect x="48" y="26" width="22" height="20" rx="6" fill="#fff"/><rect x="84" y="10" width="22" height="20" rx="6" fill="#ffe3a8"/><rect x="84" y="42" width="22" height="20" rx="6" fill="#ffe3a8"/><circle cx="22" cy="36" r="3.4" fill="#e8590c"/><path d="M54 36h10M59 31v10" stroke="#e8590c" stroke-width="2.2"/></svg></span><span class="tname">AI Workflows</span></li></ul>
+            <ul class="tiles tiles-ai"><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t81218" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e5bff"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t81218)"/><rect x="26" y="12" width="68" height="48" rx="6" fill="#fff" opacity=".92"/><polygon points="26,60 48,34 62,48 74,38 94,60" fill="#7a4cd6"/><circle cx="78" cy="26" r="6" fill="#ffbf75"/><path d="M104 10l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM12 44l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#fff"/></svg></span><span class="tname">Generative AI</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t8187" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d5afe"/><stop offset="1" stop-color="#6ec1ff"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t8187)"/><rect x="10" y="9" width="62" height="24" rx="9" fill="#fff" opacity=".95"/><rect x="18" y="16" width="40" height="3.5" rx="1.7" fill="#4a5bd6"/><rect x="18" y="23" width="26" height="3.5" rx="1.7" fill="#4a5bd6" opacity=".5"/><rect x="48" y="39" width="62" height="24" rx="9" fill="#0b1b44" opacity=".85"/><rect x="56" y="46" width="42" height="3.5" rx="1.7" fill="#bcd0ff"/><circle cx="58" cy="57" r="2" fill="#7db3ff"/><circle cx="65" cy="57" r="2" fill="#7db3ff" opacity=".7"/><circle cx="72" cy="57" r="2" fill="#7db3ff" opacity=".4"/></svg></span><span class="tname">LLMs</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t37714" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14c8b4"/><stop offset="1" stop-color="#2a63e6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t37714)"/><rect x="14" y="10" width="92" height="52" rx="6" fill="#0b2b3a" opacity=".55"/><circle cx="46" cy="30" r="7" fill="#ffd58a"/><path d="M34 54c0-12 24-12 24 0z" fill="#ffd58a"/><rect x="30" y="18" width="32" height="38" rx="3" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 3"/><rect x="30" y="10" width="34" height="8" rx="2" fill="#fff"/><rect x="34" y="13" width="22" height="2.4" rx="1.2" fill="#0b6c7a"/><rect x="72" y="34" width="26" height="20" rx="3" fill="none" stroke="#ffbf75" stroke-width="1.8"/><circle cx="85" cy="44" r="4" fill="#ffbf75"/></svg></span><span class="tname">Computer Vision</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t75988" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb300"/><stop offset="1" stop-color="#ef4d3c"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t75988)"/><g stroke="#fff" stroke-opacity=".45" stroke-width="1"><path d="M16 12H104M16 28H104M16 44H104M16 12V60M38 12V60M60 12V60M82 12V60M104 12V60"/></g><rect x="16" y="44" width="88" height="16" fill="#3a1a00" opacity=".45"/><path d="M27 36L49 36L49 20L71 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-dasharray="4 3"/><circle cx="27" cy="36" r="6" fill="#fff"/><circle cx="27" cy="36" r="2.4" fill="#e85d04"/><path d="M82 28V10M82 10l14 5-14 5z" fill="#fff" stroke="#fff" stroke-width="2"/></svg></span><span class="tname">Reinforcement Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t91551" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f9c"/><stop offset="1" stop-color="#7b3fe4"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t91551)"/><g stroke="#fff" stroke-opacity=".4" stroke-width="1"><path d="M22 18L52 12M22 18L52 32M22 18L52 52M22 36L52 12M22 36L52 32M22 36L52 52M22 54L52 12M22 54L52 32M22 54L52 52M52 12L82 24M52 12L82 48M52 32L82 24M52 32L82 48M52 52L82 24M52 52L82 48M82 24L102 36M82 48L102 36"/></g><g fill="#fff"><circle cx="22" cy="18" r="5"/><circle cx="22" cy="36" r="5"/><circle cx="22" cy="54" r="5"/><circle cx="52" cy="12" r="5" fill="#9ae6ff"/><circle cx="52" cy="32" r="5" fill="#9ae6ff"/><circle cx="52" cy="52" r="5" fill="#9ae6ff"/><circle cx="82" cy="24" r="5"/><circle cx="82" cy="48" r="5"/><circle cx="102" cy="36" r="6" fill="#ffbf75"/></g></svg></span><span class="tname">Deep Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t65103" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12b886"/><stop offset="1" stop-color="#1c7ed6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t65103)"/><path d="M14 58L106 14" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"/><g fill="#fff"><circle cx="24" cy="44" r="4"/><circle cx="38" cy="34" r="4"/><circle cx="30" cy="54" r="4"/><circle cx="50" cy="44" r="4"/><circle cx="46" cy="58" r="4"/><circle cx="58" cy="52" r="4"/></g><g fill="#ffd166"><circle cx="64" cy="22" r="4"/><circle cx="78" cy="30" r="4"/><circle cx="90" cy="20" r="4"/><circle cx="82" cy="42" r="4"/><circle cx="100" cy="34" r="4"/><circle cx="70" cy="12" r="4"/></g></svg></span><span class="tname">Machine Learning</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t41138" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6336c"/><stop offset="1" stop-color="#7048e8"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t41138)"/><rect x="12" y="12" width="96" height="48" rx="8" fill="#fff" opacity=".93"/><g font-family="monospace" font-size="9" font-weight="700"><text x="20" y="30" fill="#3a2a66">The</text><text x="40" y="30" fill="#d6336c">model</text><text x="72" y="30" fill="#3a2a66">reads</text><text x="20" y="48" fill="#3a2a66">every</text><text x="52" y="48" fill="#1c7ed6">word</text></g><rect x="38" y="33" width="30" height="3" rx="1.5" fill="#d6336c"/><rect x="50" y="51" width="28" height="3" rx="1.5" fill="#1c7ed6"/></svg></span><span class="tname">NLP</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t58183" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15aabf"/><stop offset="1" stop-color="#364fc7"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t58183)"/><rect x="10" y="14" width="26" height="34" rx="3" fill="#fff" opacity=".6"/><rect x="16" y="20" width="26" height="34" rx="3" fill="#fff" opacity=".85"/><rect x="21" y="27" width="16" height="2.6" rx="1.3" fill="#1971c2"/><rect x="21" y="33" width="12" height="2.6" rx="1.3" fill="#1971c2" opacity=".5"/><circle cx="64" cy="34" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M72 42l9 9" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><rect x="84" y="14" width="28" height="26" rx="8" fill="#0b1b44" opacity=".85"/><rect x="89" y="21" width="18" height="3" rx="1.5" fill="#9ae6ff"/><rect x="89" y="28" width="12" height="3" rx="1.5" fill="#9ae6ff" opacity=".6"/></svg></span><span class="tname">RAG</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t54067" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb703"/><stop offset="1" stop-color="#fb8500"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t54067)"/><g transform="translate(34 3) scale(.98)"><circle cx="26" cy="33" r="25" fill="#FFD21E" stroke="#fff" stroke-width="3"/><ellipse cx="18" cy="28" rx="3" ry="4" fill="#3A3B45"/><ellipse cx="34" cy="28" rx="3" ry="4" fill="#3A3B45"/><path d="M13 40c3 9 23 9 26 0" fill="#7A2B2B" stroke="#3A3B45" stroke-width="2.2" stroke-linecap="round"/><path d="M20 45c2 3 10 3 12 0" fill="#FF6B7A"/><circle cx="6" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/><circle cx="46" cy="42" r="5" fill="#FFD21E" stroke="#fff" stroke-width="2.4"/></g></svg></span><span class="tname">Hugging Face Transformers</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t93649" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#364156"/><stop offset="1" stop-color="#12b8a6"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t93649)"/><rect x="12" y="10" width="62" height="52" rx="6" fill="#0a1226" opacity=".88"/><g font-family="monospace" font-size="7.5"><text x="18" y="24" fill="#7db3ff">POST /v1/chat</text><text x="18" y="35" fill="#ffd58a">{"q": "…"}</text><text x="18" y="46" fill="#5fe3c9">→ 200 OK</text></g><path d="M78 36H98" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/><path d="M98 30l8 6-8 6z" fill="#fff"/><circle cx="110" cy="20" r="3" fill="#fff"/></svg></span><span class="tname">Model API Integration</span></li><li class="tile ai"><span class="thumb"><svg viewBox="4 -20 112 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="t61480" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e0407a"/></linearGradient></defs><rect x="-20" y="-30" width="160" height="140" fill="url(#t61480)"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M32 36H48M70 36L84 20M70 36L84 52"/></g><rect x="12" y="26" width="20" height="20" rx="6" fill="#fff"/><rect x="48" y="26" width="22" height="20" rx="6" fill="#fff"/><rect x="84" y="10" width="22" height="20" rx="6" fill="#ffe3a8"/><rect x="84" y="42" width="22" height="20" rx="6" fill="#ffe3a8"/><circle cx="22" cy="36" r="3.4" fill="#e8590c"/><path d="M54 36h10M59 31v10" stroke="#e8590c" stroke-width="2.2"/></svg></span><span class="tname">AI Workflows</span></li></ul>
           </div>
 
           <div class="panel box b-lang" style="--c:#ffbf75">
@@ -4647,20 +4717,95 @@ if ("IntersectionObserver" in window) {
     anim = requestAnimationFrame(frame);
   }
 
+  /* split-flap board: every letter flips through random characters, then lands on the right one */
+  let flapRaf = 0;
+  const FLAP_SET = { l: "abcdefghijklmnopqrstuvwxyz", u: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", d: "0123456789" };
+  const flapRand = (k) => FLAP_SET[k][Math.floor(Math.random() * FLAP_SET[k].length)];
+
+  function flapBuild(node, text) {
+    node.textContent = "";
+    node.setAttribute("aria-label", text);
+    const cells = [];
+    text.split(" ").forEach((word, wi, arr) => {
+      const w = document.createElement("span");
+      w.className = "w";
+      w.setAttribute("aria-hidden", "true");
+      for (const c of word) {
+        const s = document.createElement("span");
+        s.className = "ch";
+        s.textContent = c;
+        w.appendChild(s);
+        cells.push({ node: s, target: c });
+      }
+      node.appendChild(w);
+      if (wi < arr.length - 1) node.appendChild(document.createTextNode(" "));
+    });
+    return cells;
+  }
+
+  function flapAll(groups) {
+    cancelAnimationFrame(flapRaf);
+    groups.forEach((g) => { g.cells = flapBuild(g.el, g.text); });
+    groups.forEach((g) => g.cells.forEach((c) => { c.w = c.node.getBoundingClientRect().width; }));
+    const live = [];
+    groups.forEach((g) => g.cells.forEach((c, i) => {
+      const k = /[a-z]/.test(c.target) ? "l" : /[A-Z]/.test(c.target) ? "u" : /[0-9]/.test(c.target) ? "d" : null;
+      if (!k) return;
+      c.k = k;
+      c.node.style.width = c.w + "px";
+      c.node.textContent = flapRand(k);
+      c.node.classList.add("wait");
+      c.start = g.delay + i * 8 + Math.random() * 70;
+      c.flips = 3 + Math.floor(Math.random() * 4);
+      c.last = -1;
+      live.push(c);
+    }));
+    const t0 = performance.now();
+    function tick(now) {
+      let left = 0;
+      for (const c of live) {
+        if (c.done) continue;
+        const e = now - t0 - c.start;
+        if (e < 0) { left++; continue; }
+        c.node.classList.remove("wait");
+        const step = Math.floor(e / 55);
+        if (step === c.last) { left++; continue; }
+        c.last = step;
+        if (step >= c.flips) {
+          c.node.textContent = c.target;
+          c.node.classList.remove("fa", "fb");
+          c.node.classList.add("land");
+          c.done = true;
+        } else {
+          c.node.textContent = flapRand(c.k);
+          const on = step % 2 ? "fa" : "fb", off = step % 2 ? "fb" : "fa";
+          c.node.classList.remove(off); c.node.classList.add(on);
+          left++;
+        }
+      }
+      if (left > 0) flapRaf = requestAnimationFrame(tick);
+    }
+    flapRaf = requestAnimationFrame(tick);
+  }
+
   function show(i, animate = true) {
     index = (i + items.length) % items.length;
     const it = items[index];
     items.forEach((n, k) => { n.classList.toggle("is-on", k === index); n.setAttribute("aria-current", k === index ? "true" : "false"); });
     el.title.textContent = it.dataset.title;
     el.issuer.textContent = it.dataset.issuer;
+    const flapOn = animate && !reduceMotion;
+    const lines = (it.dataset.desc || "").split("|");
     if (el.desc) {
-      el.desc.replaceChildren(...(it.dataset.desc || "").split("|").map((line, n) => {
-        const li = document.createElement("li");
-        li.style.setProperty("--i", n);
-        li.textContent = line;
-        return li;
-      }));
-      if (animate && el.side) { el.side.classList.remove("is-falling"); void el.side.offsetWidth; el.side.classList.add("is-falling"); }
+      el.desc.replaceChildren(...lines.map(() => document.createElement("li")));
+    }
+    if (flapOn) {
+      const groups = [{ el: el.issuer, text: it.dataset.issuer, delay: 0 }, { el: el.title, text: it.dataset.title, delay: 60 }];
+      if (el.desc) [...el.desc.children].forEach((li, n) => groups.push({ el: li, text: lines[n], delay: 260 + n * 120 }));
+      flapAll(groups);
+    } else {
+      cancelAnimationFrame(flapRaf);
+      if (el.desc) [...el.desc.children].forEach((li, n) => { li.textContent = lines[n]; });
     }
     el.link.href = it.dataset.pdf;
     el.count.textContent = `${pad(index + 1)} / ${pad(items.length)}`;
@@ -4704,7 +4849,7 @@ if ("IntersectionObserver" in window) {
   if ("IntersectionObserver" in window && !reduceMotion) {
     cv.style.opacity = 1;
     const io = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); decode(); }
+      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); show(index); }
     }, { threshold: 0.35 });
     io.observe(stage);
   }
