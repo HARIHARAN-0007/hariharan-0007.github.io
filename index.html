@@ -3962,6 +3962,105 @@ body {
   line-height: 1.5;
 }
 
+/* ------------------------------------------------------------------
+   Responsive hero (authoritative, keep last)
+------------------------------------------------------------------ */
+@media (max-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+
+  .photo {
+    order: -1;
+    width: min(52vw, 280px);
+    margin-inline: auto;
+  }
+
+  .hero {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .photo {
+    width: min(62vw, 250px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Phones: skills grids, achievements, narrow project cards
+------------------------------------------------------------------ */
+@media (max-width: 560px) {
+  .tiles-ai {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px 10px;
+  }
+
+  .tiles-ai > li { flex-basis: auto; }
+
+  .b-lang .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 8px;
+  }
+
+  .b-lang .tile .tname { font-size: 0.82rem; }
+
+  .b-front .tiles,
+  .b-back .tiles,
+  .b-db .tiles {
+    gap: 22px 8px;
+  }
+
+  .b-db .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .tile .tname { font-size: 0.84rem; }
+  .tbox, .tile .thumb { width: 52px; height: 52px; }
+}
+
+@media (max-width: 400px) {
+  .sfm-copy, .steps, .step { min-width: 0; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step { padding-inline: 10px; font-size: 0.9rem; }
+}
+
+@media (max-width: 700px) {
+  .sfm-copy { min-width: 0; }
+}
+
+@media (max-width: 560px) {
+  .win {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    column-gap: 14px;
+    align-items: start;
+    padding: 18px;
+  }
+
+  .win .medal {
+    grid-row: 1 / span 3;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+  }
+
+  .win b { font-size: 1.25rem; margin: 0; }
+  .win h3 { margin-top: 2px; }
+  .win p { grid-column: 1 / -1; margin-top: 10px; }
+}
+
+/* nav: keep one line at small-laptop widths */
+.brand { white-space: nowrap; }
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .topbar-inner { gap: 12px; }
+  .links { gap: 0; }
+  .links a { padding: 8px 8px; font-size: 0.86rem; }
+  .nav-resume { padding: 0 12px; font-size: 0.86rem; }
+  .tools { gap: 8px; }
+}
+
 </style>
 </head>
 
@@ -5594,13 +5693,14 @@ if ("IntersectionObserver" in window) {
     box.classList.remove("is-paused");
     play();
   }));
-  box.addEventListener("mouseenter", () => { box.classList.add("is-paused"); clearInterval(timer); });
-  box.addEventListener("mouseleave", () => {
-    box.classList.remove("is-paused");
-    const bar = box.querySelector(".f-tab.is-on");
-    show(i);
-    play();
-  });
+  if (window.matchMedia("(hover: hover)").matches) {
+    box.addEventListener("mouseenter", () => { box.classList.add("is-paused"); clearInterval(timer); });
+    box.addEventListener("mouseleave", () => {
+      box.classList.remove("is-paused");
+      show(i);
+      play();
+    });
+  }
   play();
 })();
 
