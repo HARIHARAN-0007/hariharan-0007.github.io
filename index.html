@@ -2203,7 +2203,7 @@ body {
 }
 
 .v-stage.is-decoding .v-scan {
-  animation: scan 0.5s ease-in;
+  animation: scan 0.85s ease-in-out;
 }
 
 @keyframes scan {
@@ -3625,7 +3625,7 @@ if ("IntersectionObserver" in window) {
     cv.style.opacity = 1;
     stage.classList.remove("is-decoding"); void stage.offsetWidth; stage.classList.add("is-decoding");
     const blocks = [72, 48, 32, 22, 14, 9, 5, 2];
-    const stepMs = 55, t0 = performance.now();
+    const stepMs = 95, t0 = performance.now();
     let last = -1;
     function frame(now) {
       const s = Math.min(blocks.length, Math.floor((now - t0) / stepMs));
@@ -3672,7 +3672,7 @@ if ("IntersectionObserver" in window) {
   function start() {
     if (reduceMotion) return;
     stop();
-    timer = setInterval(() => show(index + 1), 5500);
+    timer = setInterval(() => show(index + 1), 4000);
   }
   function stop() { clearInterval(timer); timer = null; }
 
