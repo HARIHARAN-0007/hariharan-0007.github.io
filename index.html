@@ -2203,7 +2203,7 @@ body {
 }
 
 .v-stage.is-decoding .v-scan {
-  animation: scan 0.85s ease-in-out;
+  animation: scan 0.5s ease-in;
 }
 
 @keyframes scan {
@@ -3625,7 +3625,7 @@ if ("IntersectionObserver" in window) {
     cv.style.opacity = 1;
     stage.classList.remove("is-decoding"); void stage.offsetWidth; stage.classList.add("is-decoding");
     const blocks = [72, 48, 32, 22, 14, 9, 5, 2];
-    const stepMs = 95, t0 = performance.now();
+    const stepMs = 55, t0 = performance.now();
     let last = -1;
     function frame(now) {
       const s = Math.min(blocks.length, Math.floor((now - t0) / stepMs));
@@ -3672,15 +3672,13 @@ if ("IntersectionObserver" in window) {
   function start() {
     if (reduceMotion) return;
     stop();
-    timer = setInterval(() => show(index + 1), 8000);
+    timer = setInterval(() => show(index + 1), 5500);
   }
   function stop() { clearInterval(timer); timer = null; }
 
   document.getElementById("sliderPrev").addEventListener("click", () => { show(index - 1); start(); });
   document.getElementById("sliderNext").addEventListener("click", () => { show(index + 1); start(); });
   items.forEach((n, k) => n.addEventListener("click", () => { show(k); start(); }));
-  box.addEventListener("mouseenter", stop);
-  box.addEventListener("mouseleave", start);
   box.addEventListener("focusin", stop);
   box.addEventListener("focusout", start);
 
@@ -3722,16 +3720,16 @@ if ("IntersectionObserver" in window) {
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     cv.width = W * dpr; cv.height = H * dpr;
     cv.style.display = "block"; cv.style.opacity = 1; cv.style.background = "transparent";
-    const cell = Math.max(9, Math.round(W / 30));
+    const cell = Math.max(16, Math.round(W / 17));
     const cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
     const when = new Float32Array(cols * rows);
     let seed = 11;
     const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
     for (let r = 0; r < rows; r++)
       for (let c = 0; c < cols; c++)
-        when[r * cols + c] = (r / rows) * 0.55 + rnd() * 0.38;
-    const DUR = 3000, START_DELAY = 500, t0 = performance.now();
-    const px = Math.round(cell * 0.78);
+        when[r * cols + c] = (r / rows) * 0.5 + rnd() * 0.4;
+    const DUR = 1300, START_DELAY = 150, t0 = performance.now();
+    const px = Math.round(cell * 0.9);
 
     function paint(now) {
       const k = (now - t0 - START_DELAY) / DUR;
@@ -3744,7 +3742,7 @@ if ("IntersectionObserver" in window) {
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const i = r * cols + c;
-          const p = (k - when[i]) / 0.2;
+          const p = (k - when[i]) / 0.25;
           if (p >= 1) continue;
           left++;
           const x = c * cell, y = r * cell;
